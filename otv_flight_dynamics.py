@@ -77,7 +77,7 @@ def inclination_change_delta_v(altitude_km, delta_inclination_deg):
     delta_v = 2 * v * math.sin(delta_i_rad / 2)
     return delta_v
 
-ef ltan_drift_adjustment(
+def ltan_drift_adjustment(
     initial_ltan_hours,
     target_ltan_hours,
     initial_altitude_km,
