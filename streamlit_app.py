@@ -51,6 +51,8 @@ if module == "Flight Dynamics":
         # st.write("Delta-V Required:", f"{result['total_delta_v_kms']:.5f}"
         st.markdown(f"<span style='color:red; font-size:16px;'>**Delta-V Required (km/s)**: {result['total_delta_v_kms']:.5f}</span>", unsafe_allow_html=True)
         delta_v_budget += result['total_delta_v_kms']
+        st.markdown(f"<span style='color:blue; font-size:16px;'>**Inclination Required (deg)**: {result['inclination_deg']:.2f}</span>", unsafe_allow_html=True)
+
 
     st.markdown("---")
     st.metric(label="Total Delta-V Required (km/s):", value=f"{delta_v_budget:.5f}")
