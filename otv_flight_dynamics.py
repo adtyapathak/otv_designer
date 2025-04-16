@@ -77,8 +77,7 @@ def inclination_change_delta_v(altitude_km, delta_inclination_deg):
     delta_v = 2 * v * math.sin(delta_i_rad / 2)
     return delta_v
 
-
-def ltan_drift_adjustment(
+ef ltan_drift_adjustment(
     initial_ltan_hours,
     target_ltan_hours,
     initial_altitude_km,
@@ -112,19 +111,11 @@ def ltan_drift_adjustment(
             i_rad = math.acos(cos_i)
             i_deg = math.degrees(i_rad)
 
-            # Estimate delta-v just to change altitude + inclination (not optimized!)
             current_r = R + initial_altitude_km
             new_r = R + h
-            # v1 = orbital_velocity(current_r)
-            # v2 = orbital_velocity(new_r)
-            # dv_alt = abs(v2 - v1)
-
 
             delta_i_rad = abs(i_rad - math.radians(98.6))  # Typical SSO inclination
-            # dv_inc = 2 * v2 * math.sin(delta_i_rad / 2)
-            # total_dv = dv_alt + dv_inc
-
-            total_dv = hohmann_delta_v(current_r, new_r) + inclination_change_delta_v(h,math.degrees(delta_i_rad))
+            total_dv = hohmann_delta_v(current_r, new_r) + inclination_change_delta_v(h, math.degrees(delta_i_rad))
 
             if total_dv < min_dv:
                 min_dv = total_dv
@@ -133,7 +124,8 @@ def ltan_drift_adjustment(
                     "new_inclination_deg": i_deg,
                     "total_delta_v_kms": total_dv,
                     "required_drift_deg_per_day": required_drift_rate,
-                    "duration_days": duration_days
+                    "duration_days": duration_days,
+                    "inclination_deg": i_deg  # ✅ Added inclination export
                 }
 
     return best_solution
